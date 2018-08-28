@@ -143,10 +143,20 @@ public class StudentRegistration extends javax.swing.JFrame {
 
         reset.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         reset.setText("Reset");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
         jPanel1.add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 600, -1, -1));
 
         add1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         add1.setText("Add");
+        add1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(add1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 600, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 560, 650));
@@ -185,6 +195,11 @@ public class StudentRegistration extends javax.swing.JFrame {
 
         Demo1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Demo1.setText("Demo");
+        Demo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Demo1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(Demo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, -1, 650));
@@ -192,6 +207,64 @@ public class StudentRegistration extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Demo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Demo1ActionPerformed
+        // TODO add your handling code here:
+        
+        stid.setText("IT15023156");
+        stdname.setText("Bihandu Sanchith");
+        stdaddress.setText("E.Drake Rd Ft Collins");
+        number.setText("0772359578");
+        email_.setText("B@gmail.com");
+        pw1.setText("but123");
+        pw2.setText("but123");
+        Campus.setText("Malabe");
+        Course.setText("Software Engineering");
+        Year.setText("3");
+        Sem.setText("2");
+        
+    }//GEN-LAST:event_Demo1ActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+        
+        stid.setText("");
+        stdname.setText("");
+        stdaddress.setText("");
+        number.setText("");
+        email_.setText("");
+        pw1.setText("");
+        pw2.setText("");
+        Campus.setText("");
+        Course.setText("");
+        Year.setText("");
+        Sem.setText("");
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add1ActionPerformed
+        // TODO add your handling code here:
+        AddRegistration();
+        
+    }//GEN-LAST:event_add1ActionPerformed
+
+    
+        public void AddRegistration()
+    
+    {
+        
+        
+        String id = stid.getText();
+        String name =stdname.getText();
+        String add=stdaddress.getText();
+        String contact =number.getText();
+        String email =email_.getText();
+        String Password1 =pw1.getPassword().toString();
+        String Password2=pw2.getPassword().toString();
+        String Campus =campus.getText();
+        String Course =course.getText();
+        String Year =year.getText();
+        String sem =Sem.getText();
+        
+    }
     /**
      * @param args the command line arguments
      */
