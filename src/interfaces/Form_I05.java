@@ -90,9 +90,9 @@ public class Form_I05 extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -289,13 +289,13 @@ public class Form_I05 extends javax.swing.JFrame {
 
         jLabel24.setText("External Supervisor's Name");
         getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 1750, -1, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 1750, 190, -1));
 
         jButton1.setText("Generate I-05 Form As PDF");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 1800, -1, -1));
 
         jButton2.setText("Submit");
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 1800, -1, -1));
+        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 1750, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -343,7 +343,7 @@ public class Form_I05 extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
