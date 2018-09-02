@@ -5,22 +5,33 @@
  */
 package interfaces;
 
+import MainFiles.Dbconfig;
+import MainFiles.ValidationClass;
 import java.beans.PropertyVetoException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import MainFiles.ValidationClass;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Ekanayaketw
  */
 public class Login extends javax.swing.JFrame {
+    Connection con=null;
+    PreparedStatement pst=null;
+    ResultSet rs=null;
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        
+        //connect to DB
+        con=Dbconfig.connect();
     }
 
     /**
@@ -36,8 +47,8 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        username_ = new javax.swing.JTextField();
+        password_ = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -59,8 +70,8 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel3.setText("Usename");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, 20));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 270, 30));
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 270, 30));
+        jPanel1.add(username_, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 270, 30));
+        jPanel1.add(password_, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 270, 30));
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setText("Login");
@@ -86,8 +97,46 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        StudentRegistration SR = new StudentRegistration();
-        SR.setVisible(true);
+        String username =username_.getText();
+        String password=password_.getText();
+        
+        if((password.length()==0)||(username.length()==0))
+        {
+            
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+        }
+        else
+        {   
+        String sql="select * from login where  username=? and password=?";
+       
+        try{
+            pst=con.prepareStatement(sql);
+         
+           
+           pst.setString(1,username_.getText());
+            pst.setString(2,password_.getText());
+            
+            rs=pst.executeQuery();
+            
+            if(rs.next())
+            {
+                    JOptionPane.showMessageDialog(null, "Successfully login as Student");
+                     StudentRegistration SR = new StudentRegistration();
+                     SR.setVisible(true);
+                     this.dispose();
+                   
+                    
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Invalid Login!");
+        }catch(Exception e)
+        {
+            e.getMessage();
+        }
+        
+       }
+        
+       
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -134,7 +183,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField password_;
+    private javax.swing.JTextField username_;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,10 @@
 
 package interfaces;
 
+import MainFiles.Dbconfig;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,12 +17,16 @@ import javax.swing.JOptionPane;
  * @author Asus
  */
 public class Form_I01 extends javax.swing.JFrame {
+    Connection con=null;
+    PreparedStatement pst=null;
+    ResultSet rs=null;
 
     /**
      * Creates new form Form_I01
      */
     public Form_I01() {
         initComponents();
+         con=Dbconfig.connect();
 
     }
    
@@ -136,32 +144,64 @@ public class Form_I01 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String student_id=stu_id.getText();
-        String student_name=stu_name.getText();
-        String student_address=stu_address.getText();
-        String student_home_phone=stu_home_phone.getText();
-        String student_mobile_phone=stu_mobile_phone.getText();
-        String student_email=stu_email.getText();
-        String student_semester=stu_semester.getText();
-        String student_year=stu_year.getText();
-        String student_cgpa=stu_cgpa.getText();
+        String student_id_=stu_id.getText();
+        String student_name_=stu_name.getText();
+        String student_address_=stu_address.getText();
+        int student_home_phone_=Integer.parseInt(stu_home_phone.getText());
+        int student_mobile_phone_=Integer.parseInt(stu_mobile_phone.getText());
+        String student_email_=stu_email.getText();
+        int student_semester_=Integer.parseInt(stu_semester.getText());
+        int student_year_=Integer.parseInt(stu_year.getText());
+        float student_cgpa_=Float.parseFloat(stu_cgpa.getText());
         
-        if((student_id.length()==0)||(student_name.length()==0)||(student_address.length()==0)||(student_home_phone.length()==0)||(student_mobile_phone.length()==0)
-                ||(student_email.length()==0)||(student_semester.length()==0)||(student_year.length()==0)||(student_cgpa.length()==0)){
+     /*   if((student_id_.isEmpty())||(student_name_.isEmpty())||(student_address_.isEmpty())||(student_home_phone_.isEmpty())||(student_mobile_phone_.isEmpty())
+                ||(student_email_.isEmpty())||(student_semester_.isEmpty())||(student_year_.isEmpty())||(student_cgpa_.isEmpty())){
                      JOptionPane.showMessageDialog(null, "Fill all fields");
         }
-        else if(!student_id.startsWith("IT")){
+        else if(!student_id_.startsWith("IT")){
             JOptionPane.showMessageDialog(null, "Invalid IT number");
         }
-        else if((student_home_phone.length()!=10)&&(student_mobile_phone.length()!=10)){
+        else if((student_home_phone_.length()!=10)&&(student_mobile_phone_.length()!=10)){
             JOptionPane.showMessageDialog(null, "Invalid phone number");
         }
-        else if((!student_email.endsWith(".com"))||(!student_email.endsWith(".lk"))||(!student_email.contains("@"))){
+        else if(student_email_.indexOf('@')==0 || student_email_.indexOf('.')==0 ||student_email_.indexOf('@')>student_email_.indexOf('.')){
             JOptionPane.showMessageDialog(null, "Invalid email address");
         }
-        else if((student_semester.length()!=1)){
+        else if((student_semester_.length()!=1)){
             JOptionPane.showMessageDialog(null, "Invalid semester");
         }
+        else{*/
+        System.out.println("1st");
+            try{
+                 String q="Insert into form_i-01(student_id,student_name,"
+               + "student_address,student_home_phone,student_mobile_phone,"
+               + "student_email,student_semester,student_year,student_cgpa)"
+               + "values('"+student_id_+"','"+student_name_+"','"+student_address_+"'"
+               + ",'"+student_home_phone_+"','"+student_mobile_phone_+"',"
+               + "'"+student_email_+"','"+student_semester_+"',"
+                         + "'"+student_year_+"','"+student_cgpa_+"')";
+                System.out.println("2nd");
+              pst=(PreparedStatement) con.prepareStatement(q);
+                 System.out.println("3rd");
+              pst.execute();
+                 
+                 System.out.println("4th");
+                JOptionPane.showMessageDialog(null, "successfully added");
+                
+            }catch(Exception e){
+                e.getMessage();
+            }
+      //  }
+        
+           /*  stu_id.setText("");
+             stu_name.setText("");
+               stu_address.setText("");  
+              stu_home_phone.setText("");  
+              stu_mobile_phone.setText("");
+             stu_email.setText("");
+              stu_semester.setText("");
+              stu_year.setText("");
+              stu_cgpa.setText("");*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
