@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DBConfig;
+package MainFiles;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +20,7 @@ public class Dbconfig {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            conn=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/attendance_management","root","");
+            conn=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/SPM_DB","root","");
             
         }
         catch(ClassNotFoundException | SQLException e){
@@ -28,7 +28,7 @@ public class Dbconfig {
             System.out.println(e);
         }
         
-        
+          
         
         
         return conn;
