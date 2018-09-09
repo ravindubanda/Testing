@@ -204,6 +204,11 @@ public class StudentRegistration extends javax.swing.JFrame {
 
         view.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         view.setText("View ");
+        view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewActionPerformed(evt);
+            }
+        });
         jPanel2.add(view, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 600, -1, -1));
 
         gen.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -296,6 +301,10 @@ public class StudentRegistration extends javax.swing.JFrame {
         Year.setText(year_);
         Sem.setText(semester_);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewActionPerformed
     private void AddStudentRegistration(){
     
         String student_ID=stid.getText();

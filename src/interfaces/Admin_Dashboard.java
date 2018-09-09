@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.internal.objects.annotations.Where;
+import net.proteanit.sql.DbUtils;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -42,35 +43,25 @@ public class Admin_Dashboard extends javax.swing.JFrame{
     DefaultTableModel table;
     
     
-    public Admin_Dashboard() {
+    public Admin_Dashboard(){
        
         initComponents();
         con=Dbconfig.connect();
-        tableLoad();
         
     }
     
-    public void tableLoad()
+    public void tableLoad() throws SQLException
     {
-        try {
-            pst = con.prepareStatement("SELECT student_name,student_ID,campus,address FROM studentregistration");
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tm = (DefaultTableModel)jTable1.getModel();
-            tm.setRowCount(0);
+        
+         try {
+            String sql="select * from studentregistration";
             
-            while(rs.next()){
-                Object o[] = {rs.getString("Name"),rs.getString("IT Number"),rs.getString("Campus"),rs.getString("Address")};
-                tm.addRow(o);
-                
-            }
-            
-            //String sql = "SELECT student_name,student_ID,campus,address FROM studentregistration";
-            //pst = (PreparedStatement)con.prepareStatement(sql);
-            //rs = pst.executeQuery();
-            
+            pst=(PreparedStatement) con.prepareStatement(sql);
+            rs=pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
-            Logger.getLogger(Admin_Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,6 +80,7 @@ public class Admin_Dashboard extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -143,6 +135,13 @@ public class Admin_Dashboard extends javax.swing.JFrame{
             }
         });
 
+        jButton2.setText("View Registered students");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,10 +156,15 @@ public class Admin_Dashboard extends javax.swing.JFrame{
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(476, 476, 476))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(248, 248, 248)
+                .addGap(171, 171, 171)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -168,10 +172,14 @@ public class Admin_Dashboard extends javax.swing.JFrame{
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Statistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(22, 22, 22))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,6 +223,16 @@ public class Admin_Dashboard extends javax.swing.JFrame{
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            tableLoad();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -253,6 +271,7 @@ public class Admin_Dashboard extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Statistics;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
